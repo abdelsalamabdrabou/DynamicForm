@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <h2>Add Dynamic Form</h2>
+
+  <form [formGroup]="registrationForm" (submit)="submitForm()">    
+
+    <div class="form-group">
+      <label>Form Name</label>
+      <input type="text" formControlName="formName" class="form-control">
+    </div>
+
+    <div formArrayName="formTemplate" class="form-group">
+      <div *ngFor="let formControl of registrationForm.get('formTemplate').controls; let i = index" [formGroupName]="i" class="border border-dark rounded p-2 mb-2">
+        <div class="row pt-2">      
+          <div class="col-md-5">
+            <label>Label: </label>
+            <input type="text" class="form-control" formControlName="label">    
+          </div>
+
+          <div class="col-md-5">
+            <label>Input Name: </label>
+            <input type="text" class="form-control" formControlName="inputName">   
+          </div>
+
+          <div class="col-md-5">
+            <label>Type: </label>
+            <input type="text" class="form-control" formControlName="type">    
+          </div>
+
+          <div class="col-md-5" *ngIf="getFormValue(i).type === 'dropdown' || getFormValue(i).type === 'radio'">
+            <label>Values: </label>
+            <input type="text" class="form-control" placeholder="Ex: Cairo,Alexandria,Giza" formControlName="values">    
+          </div>
+
+          <div class="col-md-2">
+            <a (click)="removeFormTemplate(i)"><span class="btn btn-sm btn-danger mt-2">Remove</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <a (click)="addFormTemplate()" class="btn btn-success mt-2 mb-3">+ Add</a>
+      </div>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+  </form>
+</div>

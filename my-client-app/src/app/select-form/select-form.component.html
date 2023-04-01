@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Choose the form family to generate the dynamic form</h2>
+  <table class="table" style="width:50%">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Form Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let form of formsList">
+        <td>{{ form.id }}</td>
+        <td>{{ form.name }}</td>
+        <td>
+          <button [routerLink]="['/formDetails']" [queryParams]="{formId: form.id}" class="btn btn-primary">Choose</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
